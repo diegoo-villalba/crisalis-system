@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<!--  PLANTILLA THYMELEAF: usamos un motor de plantilla thymleaf  -->
+<html lang="es" xmlns:th="http://ww.thymeleaf.org">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Crisalis System</title>
+	
+	<!-- ESTILOS: -->
+
+  <!-- CSS: redireccionamos anteponiendo th y @{} en las rutas -->
+  <link th:href="@{bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+  <link th:href="@{css/heroic-features.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- NAV -->
+	<div th:include="template-foonav.html::header">	</div>
+    
+    
+    <!-- Page Content -->
+    <div class="container">
+      <!-- Jumbotron Header -->
+      <header class="jumbotron my-4">
+        <h1 class="display-3">Bienvenido a Spring Ecommerce 2021</h1>
+        <p class="lead">Tu tienda de productos en Línea</p>
+      </header>
+
+    </div>
+
+    <!-- FOOTER -->
+	<div th:include="template-foonav.html::footer">	</div>
+
+    <!-- JAVASCRIPT -->
+    <script th:src="@{jquery/jquery.min.js}"></script>
+    <script th:src="@{bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+  </body>
+
+  </html>
