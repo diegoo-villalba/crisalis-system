@@ -14,5 +14,10 @@ public class ProductoController {
 		return "producto/show";
 	}
 	
+	@GetMapping("/create")
+	public String create() {
+		return "producto/create";
+	}
+	
 
 }

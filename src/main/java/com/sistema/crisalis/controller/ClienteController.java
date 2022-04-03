@@ -13,5 +13,10 @@ public class ClienteController {
 		
 		return "cliente/show";
 	}
+	
+	@GetMapping("/create")
+	public String create() {
+		return "cliente/create";
+	}
 
 }

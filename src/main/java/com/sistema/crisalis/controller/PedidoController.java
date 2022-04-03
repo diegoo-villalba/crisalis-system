@@ -13,5 +13,10 @@ public class PedidoController {
 		
 		return "pedido/show";
 	}
+	
+	@GetMapping("/create")
+	public String create() {
+		return "pedido/create";
+	}
 
 }

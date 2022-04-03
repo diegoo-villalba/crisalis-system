@@ -13,5 +13,10 @@ public class ServicioController {
 		
 		return "servicio/show";
 	}
+	
+	@GetMapping("/create")
+	public String create() {
+		return "servicio/create";
+	}
 
 }

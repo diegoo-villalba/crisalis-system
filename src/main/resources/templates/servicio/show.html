@@ -28,11 +28,11 @@
   </h1>
 
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a th:href="@{home}">Home</a></li>
     <li class="breadcrumb-item active">Ver Servicios</li>
   </ol>
 
-  <a class="btn btn-primary" href="#" > Crear Servicio</a>
+  <a class="btn btn-primary" th:href="@{/servicios/create}" > Insertar Servicio</a>
   <h2>Servicio</h2>
   <table class="table">
     <thead>
