@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -35,11 +36,20 @@ public class PedidoController {
 	}
 	
 	//Metodo que mapea la información desde el metodo guardar en pagina "create"
-		@PostMapping("/save")
-		public String save(Pedido pedido) {
-			LOGGER.info("Este es el objeto pedido {}",pedido); //Debemos tener el metodo toString() en la clase Pedido
-			pedidoService.insertar(pedido);
-			return "redirect:/pedidos"; //Una vez insertado el registro redireccionamos a la vista show
+	@PostMapping("/save")
+	public String save(Pedido pedido) {
+		LOGGER.info("Este es el objeto pedido {}",pedido); //Debemos tener el metodo toString() en la clase Pedido
+		pedidoService.insertar(pedido);
+		return "redirect:/pedidos"; //Una vez insertado el registro redireccionamos a la vista show
 		}
-
+	
+	/*Metodo encargado de eliminar registro de la BBDD. Al igual que con update
+	 * traemos el ID por URL al cual lo mapeamos para poder obtener en la BBDD
+	 * el registro que queremos eliminar*/
+		
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable Integer id) {  //PathVariable: mapea el ID (variable) que viene en la URL y pasarla al argumento
+		pedidoService.delete(id);
+		return "redirect:/pedidos"; 
+	}
 }

@@ -68,5 +68,15 @@ public class ProductoController {
 		productoService.update(producto);
 		return "redirect:/productos";
 	}
+	
+	/*Metodo encargado de eliminar registro de la BBDD. Al igual que con update
+	 * traemos el ID por URL al cual lo mapeamos para poder obtener en la BBDD
+	 * el registro que queremos eliminar*/
+	
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable Integer id) {
+		productoService.delete(id);
+		return "redirect:/productos"; 
+	}
 
 }

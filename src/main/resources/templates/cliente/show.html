@@ -53,7 +53,7 @@
         <!-- href: Apuntamos al controlador y ademas le pasamos un id como parametro en la URL -->
          <!-- tambien le decimos que valor debe llevar como id con la expresion (id=${producto.id}) -->
         <td><a  class="btn btn-warning" th:href="@{/clientes/edit/{id} (id=${cliente.id})}">Editar</a> </td>
-        <td><a  class="btn btn-danger" href="">Eliminar</a> </td>
+        <td><a  class="btn btn-danger" th:href="@{/clientes/delete/{id} (id=${cliente.id})}">Eliminar</a> </td>
       </tr>       
     </tbody>
   </table>

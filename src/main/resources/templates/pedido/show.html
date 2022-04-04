@@ -41,7 +41,6 @@
         <th scope="col">Fecha Pedido</th>
         <th scope="col">Total</th>
         <th scope="col">Acción</th>
-        <th scope="col">Acción</th>
       </tr>
     </thead>
     <tbody>
@@ -50,8 +49,7 @@
         <td th:text="${pedido.numeroPedido}"></td>
          <td th:text="${pedido.fechaCreacion}"></td>
         <td th:text="${pedido.total}"></td>
-        <td><a  class="btn btn-warning" href="">Editar</a> </td>
-        <td><a  class="btn btn-danger" href="">Eliminar</a> </td>
+        <td><a  class="btn btn-danger" th:href="@{/pedidos/delete/{id} (id=${pedido.id})}">Eliminar</a> </td>
       </tr>       
     </tbody>
   </table>

@@ -69,5 +69,15 @@ public class ClienteController {
 		clienteService.update(cliente);
 		return "redirect:/clientes";
 	}
+	
+	/*Metodo encargado de eliminar registro de la BBDD. Al igual que con update
+	 * traemos el ID por URL al cual lo mapeamos para poder obtener en la BBDD
+	 * el registro que queremos eliminar*/
+	
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable Integer id) {
+		clienteService.delete(id);
+		return "redirect:/clientes"; 
+	}
 
 }
