@@ -36,6 +36,9 @@ public class DetallePedido {
 	@ManyToOne
 	private Servicio servicio;
 	
+	@ManyToOne
+	private ItemVenta item;
+	
 
 	public DetallePedido() {
 	}

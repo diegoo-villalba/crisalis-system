@@ -53,7 +53,13 @@
          <!-- tambien le decimos que valor debe llevar como id con la expresion (id=${producto.id}) -->
         <td><a  class="btn btn-warning" th:href="@{/productos/edit/{id} (id=${producto.id})}">Editar</a> </td>
         <td><a  class="btn btn-danger" th:href="@{/productos/delete/{id} (id=${producto.id})}">Eliminar</a> </td>
-        <td><a  class="btn btn-danger" th:href="@{/home/orden/{id} (id=${producto.id})}">Agregar al pedido</a> </td>
+        <!-- <a  class="btn btn-danger" th:href="@{/home/orden/{id} (id=${producto.id})}">Agregar al pedido</a>  -->
+        <td><form th:action="@{home/orden}" method="post">
+        <!-- CAMPO OCULTO: Guardamos el id del producto para poder recibirlo en el controlador -->
+        <input type="hidden" th:value="${producto.id}" name="id">
+        <button type="submit" class="btn btn-dark">Agregar al pedido</button>
+        
+        </form></td>
       </tr>       
     </tbody>
   </table>
