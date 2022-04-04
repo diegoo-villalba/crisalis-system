@@ -18,9 +18,6 @@ public class Producto {
 	private Integer id;
 	private String nombre;
 	private Double precio;
-	
-	@ManyToOne //Mapeo con la clase Cliente con visibilidad de ambos lados
-	private Cliente cliente; //Relacion muchos a uno
 
 	public Producto() {
 	}
@@ -29,13 +26,6 @@ public class Producto {
 		this.id = id;
 		this.nombre = nombre;
 		this.precio = precio;
-	}
-
-	public Producto(Integer id, String nombre, Double precio, Cliente cliente) {
-		this.id = id;
-		this.nombre = nombre;
-		this.precio = precio;
-		this.cliente = cliente;
 	}
 
 	public Integer getId() {
@@ -62,17 +52,9 @@ public class Producto {
 		this.precio = precio;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
 	@Override
 	public String toString() {
-		return "Producto [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", cliente=" + cliente + "]";
+		return "Producto [id=" + id + ", nombre=" + nombre + ", precio=" + precio + "]";
 	}
 
 }

@@ -134,7 +134,7 @@ public class Pedido {
 	@Override
 	public String toString() {
 		return "Pedido [id=" + id + ", total=" + total + ", numeroPedido=" + numeroPedido + ", fechaCreacion="
-				+ fechaCreacion + ", fechaRecibido=" + fechaRecibido + ", cliente=" + cliente + ", detallePedido="
+				+ fechaCreacion + ", fechaRecibido=" + fechaRecibido + ", detallePedido="
 				+ detallePedido + "]";
 	}
 

@@ -23,12 +23,6 @@ public class Cliente {
 	private String dni;
 	private String tipo;
 
-	@OneToMany(mappedBy = "cliente") // Mapeamos con el atributo de la clase Producto
-	private List<Producto> productos; // Relacion uno a muchos
-
-	@OneToMany(mappedBy = "cliente")
-	private List<Servicio> servicios; // Relacion uno a muchos
-
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedido; // Lista de pedidos del usuario
 
@@ -50,8 +44,6 @@ public class Cliente {
 		this.apellido = apellido;
 		this.dni = dni;
 		this.tipo = tipo;
-		this.productos = productos;
-		this.servicios = servicios;
 		this.pedido = pedido;
 	}
 
@@ -95,22 +87,6 @@ public class Cliente {
 		return tipo;
 	}
 
-	public List<Producto> getProductos() {
-		return productos;
-	}
-
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
-	}
-
-	public List<Servicio> getServicios() {
-		return servicios;
-	}
-
-	public void setServicios(List<Servicio> servicios) {
-		this.servicios = servicios;
-	}
-
 	public List<Pedido> getPedido() {
 		return pedido;
 	}
@@ -122,7 +98,7 @@ public class Cliente {
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", tipo=" + tipo
-				+ ", productos=" + productos + ", servicios=" + servicios + ", pedido=" + pedido + "]";
+				 + ", pedido=" + pedido + "]";
 	}
 
 }

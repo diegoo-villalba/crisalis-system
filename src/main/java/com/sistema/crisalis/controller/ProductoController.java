@@ -2,12 +2,14 @@ package com.sistema.crisalis.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sistema.crisalis.model.Producto;
+import com.sistema.crisalis.service.ProductoService;
 
 @Controller
 @RequestMapping("/productos")
@@ -15,6 +17,10 @@ public class ProductoController {
 	
 	//Variable logger para testear por consola si realiza el crud y no insertar en la BBDD
 	private final Logger LOGGER = LoggerFactory.getLogger(ProductoController.class);
+	
+	//Inyectamos la interfaz ProductoService para poder implementar todos los metodos del CRUD
+	@Autowired
+	private ProductoService productoService;
 	
 	@GetMapping("")
 	public String showProductos() {
@@ -31,6 +37,7 @@ public class ProductoController {
 	@PostMapping("/save")
 	public String save(Producto producto) {
 		LOGGER.info("Este es el objeto producto {}",producto); //Debemos tener el metodo toString() en la clase Producto
+		productoService.insertar(producto);
 		return "redirect:/productos"; //Una vez insertado el registro redireccionamos a la vista show
 	}
 	

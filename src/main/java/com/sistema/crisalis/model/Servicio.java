@@ -22,9 +22,7 @@ public class Servicio {
 	private String nombre;
 	private Double costo;
 	private boolean esEspecial;
-	
-	@ManyToOne //Mapeo con la clase Cliente con visibilidad de ambos lados
-	private Cliente cliente; //Relacion muchos a uno
+
 
 	public Servicio() {
 	}
@@ -48,7 +46,6 @@ public class Servicio {
 		this.nombre = nombre;
 		this.costo = costo;
 		this.esEspecial = esEspecial;
-		this.cliente = cliente;
 	}
 
 	public Integer getId() {
@@ -84,18 +81,11 @@ public class Servicio {
 		this.esEspecial = esEspecial;
 	}
 	
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-	
-	public Cliente getCliente() {
-		return cliente;
-	}
 
 	@Override
 	public String toString() {
 		return "Servicio [id=" + id + ", nombre=" + nombre + ", costo=" + costo
-				+ ", esEspecial=" + esEspecial + ", cliente=" + cliente + "]";
+				+ ", esEspecial=" + esEspecial + "]";
 	}
 	
 	
