@@ -9,9 +9,9 @@
 
   <title>Crisalis System</title>
 
-  <link th:href="@{bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
-  <link th:href="@{css/heroic-features.css}" rel="stylesheet">
+  <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
 
 </head>
 
@@ -41,17 +41,19 @@
         <th scope="col">Precio</th>
         <th scope="col">Acción</th>
         <th scope="col">Acción</th>
+        <th scope="col">Acción</th>
       </tr>
     </thead>
     <tbody>
     <!-- Each: para recorrer la lista de los productos de la BBDD -->
       <tr th:each="producto:${productos}"> <!-- Nombre de la variable del addAttribute en el controlador -->
         <td th:text="${producto.nombre}"></td>
-         <td th:text="${producto.precio}"></td>
+         <td th:text="${producto.costo}"></td>
          <!-- href: Apuntamos al controlador y ademas le pasamos un id como parametro en la URL -->
          <!-- tambien le decimos que valor debe llevar como id con la expresion (id=${producto.id}) -->
         <td><a  class="btn btn-warning" th:href="@{/productos/edit/{id} (id=${producto.id})}">Editar</a> </td>
         <td><a  class="btn btn-danger" th:href="@{/productos/delete/{id} (id=${producto.id})}">Eliminar</a> </td>
+        <td><a  class="btn btn-danger" th:href="@{/home/orden/{id} (id=${producto.id})}">Agregar al pedido</a> </td>
       </tr>       
     </tbody>
   </table>
@@ -62,8 +64,8 @@
 	<div th:include="template-foonav.html::footer">	</div>
 
 <!-- JAVASCRIPT -->
-    <script th:src="@{jquery/jquery.min.js}"></script>
-    <script th:src="@{bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/jquery/jquery.min.js}"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 </body>
 

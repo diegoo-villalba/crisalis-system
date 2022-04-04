@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://ww.thymeleaf.org">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Crisalis System</title>
+
+<link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+<link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<!-- NAV -->
+	<div th:include="template-foonav.html::header"></div>
+
+	<div class="container">
+
+
+		<h1 class="mt-4 mb-3">
+			Crisalis System <small>Pedido detallado</small>
+		</h1>
+
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a th:href="@{home}">Home</a></li>
+			<li class="breadcrumb-item active">Pedido</li>
+		</ol>
+
+		<div class="card mb-4">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-lg-9">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Item</th>
+									<th scope="col">Precio</th>
+									<th scope="col">Total</th>
+									<th scope="col">Acción</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Nombre</td>
+									<td>Precio</td>
+									<td>$</td>
+									<td><a href="#" class="btn btn-danger">Quitar</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="col-lg-3">
+						<h2 class="card-title">SUBTOTAL</h2>
+
+						<ul class="list-group">
+							<li class="list-group-item"><h5>Total: $ 10</h5></li>
+							<a href="resumenorden.html" class="btn btn-dark">Ver Orden</a>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- FOOTER -->
+	<div th:include="template-foonav.html::footer"></div>
+
+	<!-- JAVASCRIPT -->
+	<script th:src="@{/jquery/jquery.min.js}"></script>
+	<script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>
