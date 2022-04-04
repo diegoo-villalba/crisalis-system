@@ -1,5 +1,6 @@
 package com.sistema.crisalis.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.sistema.crisalis.model.Cliente;
@@ -15,5 +16,7 @@ public interface ClienteService {
 	public void update(Cliente cliente);
 
 	public void delete(Integer id);
+	
+	public List<Cliente> getClientes();
 
 }

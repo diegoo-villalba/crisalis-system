@@ -37,20 +37,19 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Fecha creacion</th>
-        <th scope="col">Costo</th>
-        <th scope="col">Cliente</th>
+        <th scope="col">Numero Pedido</th>
+        <th scope="col">Fecha Pedido</th>
+        <th scope="col">Total</th>
         <th scope="col">Acción</th>
         <th scope="col">Acción</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td ></td>
-        <td ></td>
-        <td ></td>
-        <td ></td>
+     <!-- Each: para recorrer la lista de los productos de la BBDD -->
+      <tr th:each="pedido:${pedidos}"> <!-- Nombre de la variable del addAttribute en el controlador -->
+        <td th:text="${pedido.numeroPedido}"></td>
+         <td th:text="${pedido.fechaCreacion}"></td>
+        <td th:text="${pedido.total}"></td>
         <td><a  class="btn btn-warning" href="">Editar</a> </td>
         <td><a  class="btn btn-danger" href="">Eliminar</a> </td>
       </tr>       

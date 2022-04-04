@@ -1,5 +1,6 @@
 package com.sistema.crisalis.servicesImpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,11 @@ public class ClienteServiceImpl implements ClienteService{
 	@Override
 	public void delete(Integer id) {
 		clienteDAO.deleteById(id);
+	}
+
+	@Override
+	public List<Cliente> getClientes() {
+		return clienteDAO.findAll();
 	}
 
 }

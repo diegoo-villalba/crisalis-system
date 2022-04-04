@@ -1,5 +1,6 @@
 package com.sistema.crisalis.servicesImpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,11 @@ public class PedidoServiceImpl implements PedidoService{
 	public void delete(Integer id) {
 		pedidoDAO.deleteById(id);
 		
+	}
+
+	@Override
+	public List<Pedido> getPedidos() {
+		return pedidoDAO.findAll();
 	}
 
 }

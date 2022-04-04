@@ -1,5 +1,6 @@
 package com.sistema.crisalis.servicesImpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,10 @@ public class ServicioServiceImpl implements ServicioService{
 	public void delete(Integer id) {
 		servicioDAO.deleteById(id);
 		
+	}
+	@Override
+	public List<Servicio> getServicios() {
+		return servicioDAO.findAll();
 	}
 
 }

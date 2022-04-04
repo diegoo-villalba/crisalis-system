@@ -1,5 +1,6 @@
 package com.sistema.crisalis.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.sistema.crisalis.model.Pedido;
@@ -15,5 +16,7 @@ public interface PedidoService {
 		public void update(Pedido pedido);
 
 		public void delete(Integer id);
+		
+		public List<Pedido> getPedidos();
 
 }

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +24,8 @@ public class ClienteController {
 	private ClienteService clienteService;
 	
 	@GetMapping("")
-	public String showProductos() {
-		
+	public String showProductos(Model model) { //El objeto model lleva la info desde el backend a la vista
+		model.addAttribute("clientes", clienteService.getClientes()); //Enviamos a la variable "clientes" la lista de clientes obtenida de la BBDD
 		return "cliente/show";
 	}
 	
