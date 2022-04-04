@@ -47,21 +47,27 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>Nombre</td>
-									<td>Precio</td>
-									<td>$</td>
+							<!-- Recorremos el detalle del pedido para obtener los atributos -->
+								<tr th:each="dPedido:${detallePedido}">
+									<td th:text="${dPedido.nombre}"></td>
+									<td th:text="${dPedido.precio}"></td>
+									<td th:text="${dPedido.total}"></td>
 									<td><a href="#" class="btn btn-danger">Quitar</a></td>
 								</tr>
 							</tbody>
 						</table>
-					</div>
+					</div> <!-- detallePedido
+							private String nombre;
+							private double precio;
+							private double total;
+							
+					 -->
 
 					<div class="col-lg-3">
 						<h2 class="card-title">SUBTOTAL</h2>
 
 						<ul class="list-group">
-							<li class="list-group-item"><h5>Total: $ 10</h5></li>
+							<li class="list-group-item"><h5 th:text="${pedido.total}">Total: $ 10</h5></li>
 							<a href="resumenorden.html" class="btn btn-dark">Ver Orden</a>
 						</ul>
 					</div>

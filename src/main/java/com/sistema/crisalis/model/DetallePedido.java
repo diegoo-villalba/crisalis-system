@@ -18,55 +18,46 @@ public class DetallePedido {
 	@Column(name = "id")
 	private int id;
 	private String nombre;
-	private Double precio;
-	private Double total;
-	
+	private double precio;
+	private double total;
+
 	@OneToOne
-	private Pedido pedido; //Un pedido tiene su detalle
-	
-	/*En el detalle del pedido hay productos y servicios.
-	*Es una relacion unidireccional porque no neceistamos 
-	* saber en producto/serviico el detalle del pedido.
-	* Solo lo vemos desde el detalle del pedido
-	* */
-	
-	@ManyToOne
-	private Producto producto;
-	
-	@ManyToOne
-	private Servicio servicio;
-	
+	private Pedido pedido; // Un pedido tiene su detalle
+
+	/*
+	 * En el detalle del pedido hay productos y servicios. Es una relacion
+	 * unidireccional porque no neceistamos saber en producto/serviico el detalle
+	 * del pedido. Solo lo vemos desde el detalle del pedido
+	 */
+
 	@ManyToOne
 	private ItemVenta item;
-	
 
 	public DetallePedido() {
 	}
 
-	public DetallePedido(int id, String nombre, Double precio, Double total) {
+	public DetallePedido(int id, String nombre, double precio, double total) {
 		this.id = id;
 		this.nombre = nombre;
 		this.precio = precio;
 		this.total = total;
 	}
 
-	public DetallePedido(int id, String nombre, Double precio, Double total, Pedido pedido) {
+	public DetallePedido(int id, String nombre, double precio, double total, Pedido pedido) {
 		this.id = id;
 		this.nombre = nombre;
 		this.precio = precio;
 		this.total = total;
 		this.pedido = pedido;
 	}
-	
-	public DetallePedido(int id, String nombre, Double precio, Double total, Pedido pedido, Producto producto,
-			Servicio servicio) {
+
+	public DetallePedido(int id, String nombre, double precio, double total, Pedido pedido, ItemVenta item) {
 		this.id = id;
 		this.nombre = nombre;
 		this.precio = precio;
 		this.total = total;
 		this.pedido = pedido;
-		this.producto = producto;
-		this.servicio = servicio;
+		this.item = item;
 	}
 
 	public int getId() {
@@ -77,11 +68,11 @@ public class DetallePedido {
 		return nombre;
 	}
 
-	public Double getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
 
-	public Double getTotal() {
+	public double getTotal() {
 		return total;
 	}
 
@@ -93,11 +84,11 @@ public class DetallePedido {
 		this.nombre = nombre;
 	}
 
-	public void setPrecio(Double precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 
-	public void setTotal(Double total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 
@@ -108,27 +99,19 @@ public class DetallePedido {
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
-	
-	public Producto getProducto() {
-		return producto;
+
+	public ItemVenta getItem() {
+		return item;
 	}
 
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
-
-	public Servicio getServicio() {
-		return servicio;
-	}
-
-	public void setServicio(Servicio servicio) {
-		this.servicio = servicio;
+	public void setItem(ItemVenta item) {
+		this.item = item;
 	}
 
 	@Override
 	public String toString() {
 		return "DetallePedido [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", total=" + total
-				+ ", pedido=" + pedido + ", producto=" + producto + ", servicio=" + servicio + "]";
+				+ ", pedido=" + pedido + ", item=" + item + "]";
 	}
 
 }

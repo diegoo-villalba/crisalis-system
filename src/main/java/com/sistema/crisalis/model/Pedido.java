@@ -21,7 +21,7 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	private Double total;
+	private double total;
 	private String numeroPedido;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -39,14 +39,14 @@ public class Pedido {
 	public Pedido() {
 	}
 
-	public Pedido(Double total, String numeroPedido, LocalDate fechaCreacion, LocalDate fechaRecibido) {
+	public Pedido(double total, String numeroPedido, LocalDate fechaCreacion, LocalDate fechaRecibido) {
 		this.total = total;
 		this.numeroPedido = numeroPedido;
 		this.fechaCreacion = fechaCreacion;
 		this.fechaRecibido = fechaRecibido;
 	}
 
-	public Pedido(Integer id, Double total, String numeroPedido, LocalDate fechaCreacion, LocalDate fechaRecibido) {
+	public Pedido(Integer id, double total, String numeroPedido, LocalDate fechaCreacion, LocalDate fechaRecibido) {
 		this.id = id;
 		this.total = total;
 		this.numeroPedido = numeroPedido;
@@ -54,7 +54,7 @@ public class Pedido {
 		this.fechaRecibido = fechaRecibido;
 	}
 
-	public Pedido(Integer id, Double total, String numeroPedido, LocalDate fechaCreacion, LocalDate fechaRecibido,
+	public Pedido(Integer id, double total, String numeroPedido, LocalDate fechaCreacion, LocalDate fechaRecibido,
 			Cliente cliente) {
 		this.id = id;
 		this.total = total;
@@ -64,7 +64,7 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	public Pedido(Integer id, Double total, String numeroPedido, LocalDate fechaCreacion, LocalDate fechaRecibido,
+	public Pedido(Integer id, double total, String numeroPedido, LocalDate fechaCreacion, LocalDate fechaRecibido,
 			Cliente cliente, DetallePedido detallePedido) {
 		this.id = id;
 		this.total = total;
@@ -79,7 +79,7 @@ public class Pedido {
 		return id;
 	}
 
-	public Double getTotal() {
+	public double getTotal() {
 		return total;
 	}
 
@@ -99,7 +99,7 @@ public class Pedido {
 		this.id = id;
 	}
 
-	public void setTotal(Double total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 
