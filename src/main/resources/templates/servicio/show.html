@@ -49,8 +49,10 @@
       <tr th:each="servicio:${servicios}"> <!-- Nombre de la variable del addAttribute en el controlador -->
         <td th:text="${servicio.nombre}"></td>
         <td th:text="${servicio.costo}"></td>
-        <td th:text="${servicio.isEsEspecial()}"></td>
-        <td><a  class="btn btn-warning" href="">Editar</a> </td>
+        <td th:text="${servicio.isEsEspecial()}"></td> 
+        <!-- href: Apuntamos al controlador y ademas le pasamos un id como parametro en la URL -->
+         <!-- tambien le decimos que valor debe llevar como id con la expresion (id=${producto.id}) -->
+        <td><a  class="btn btn-warning" th:href="@{/servicios/edit/{id} (id=${servicio.id})}">Editar</a> </td>
         <td><a  class="btn btn-danger" href="">Eliminar</a> </td>
       </tr>       
     </tbody>

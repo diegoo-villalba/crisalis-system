@@ -1,11 +1,14 @@
 package com.sistema.crisalis.controller;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -42,5 +45,28 @@ public class ProductoController {
 		return "redirect:/productos"; //Una vez insertado el registro redireccionamos a la vista show
 	}
 	
+	/*Metodo que recibe el ID de cada registro que lo obtenemos al apretar "Editar" y 
+	 * con ese dato lo buscamos en la BBDD y lo traemos a la vista para luego poder editarlo*/
+	
+	@GetMapping("/edit/{id}") //Obtenemos el ID del registro que queremos editar, por eso colocamos el nombre de la variable
+	public String edit(@PathVariable Integer id, Model model) {  //PathVariable: mapea el ID (variable) que viene en la URL y pasarla al argumento
+		Producto producto = new Producto();
+		
+		Optional<Producto> optionalProducto = productoService.getUnProducto(id); //Definimos un objeto contenedor Optional para el Producto que traemos de la BBDD
+		
+		producto = optionalProducto.get();
+		
+		LOGGER.info("Producto buscado: {}", producto);
+		
+		model.addAttribute("producto", producto); //Nos envia todo el objeto buscado en la BBDD a la vista
+		
+		return "producto/edit";
+	}
+	
+	@PostMapping("/update")
+	public String update(Producto producto) {
+		productoService.update(producto);
+		return "redirect:/productos";
+	}
 
 }
