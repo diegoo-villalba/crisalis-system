@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "pedido")
 public class Pedido {
@@ -21,7 +23,11 @@ public class Pedido {
 	private Integer id;
 	private Double total;
 	private String numeroPedido;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaCreacion;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaRecibido;
 
 	@ManyToOne

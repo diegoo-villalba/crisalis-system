@@ -21,7 +21,6 @@ public class Servicio {
 	private Integer id;
 	private String nombre;
 	private Double costo;
-	private LocalDate fechaCompra;
 	private boolean esEspecial;
 	
 	@ManyToOne //Mapeo con la clase Cliente con visibilidad de ambos lados
@@ -34,14 +33,12 @@ public class Servicio {
 		this.id = id;
 		this.nombre = nombre;
 		this.costo = costo;
-		this.fechaCompra = fechaCompra;
 	}
 
 	public Servicio(Integer id, String nombre, Double costo, LocalDate fechaCompra, boolean esEspecial) {
 		this.id = id;
 		this.nombre = nombre;
 		this.costo = costo;
-		this.fechaCompra = fechaCompra;
 		this.esEspecial = esEspecial;
 	}
 	
@@ -50,7 +47,6 @@ public class Servicio {
 		this.id = id;
 		this.nombre = nombre;
 		this.costo = costo;
-		this.fechaCompra = fechaCompra;
 		this.esEspecial = esEspecial;
 		this.cliente = cliente;
 	}
@@ -65,10 +61,6 @@ public class Servicio {
 
 	public Double getCosto() {
 		return costo;
-	}
-
-	public LocalDate getFechaCompra() {
-		return fechaCompra;
 	}
 
 	public boolean isEsEspecial() {
@@ -87,9 +79,6 @@ public class Servicio {
 		this.costo = costo;
 	}
 
-	public void setFechaCompra(LocalDate fechaCompra) {
-		this.fechaCompra = fechaCompra;
-	}
 
 	public void setEsEspecial(boolean esEspecial) {
 		this.esEspecial = esEspecial;
@@ -105,7 +94,7 @@ public class Servicio {
 
 	@Override
 	public String toString() {
-		return "Servicio [id=" + id + ", nombre=" + nombre + ", costo=" + costo + ", fechaCompra=" + fechaCompra
+		return "Servicio [id=" + id + ", nombre=" + nombre + ", costo=" + costo
 				+ ", esEspecial=" + esEspecial + ", cliente=" + cliente + "]";
 	}
 	
