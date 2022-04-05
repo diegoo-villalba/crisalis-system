@@ -86,14 +86,18 @@ public class HomeController {
 		//Declaramos las variables necesarias para generar el pedido
 		DetallePedido detallePedido = new DetallePedido();
 		ItemVenta item = new ItemVenta();
+		Cliente cliente = new Cliente();
 		double sumaTotal = 0;
 		
 		Optional<ItemVenta> itemOptional = itemVentaService.getItem(id);
+		//Optional<Cliente> clienteOptional = clienteService.getUnCliente(idCliente);
 		
 		LOGGER.info("Item añadido: {}", itemOptional.get());
+		//LOGGER.info("Cliente añadido: {}", clienteOptional.get());
 		
 		//Colocamos en la variable ITEM lo que tiene el contenedor Optional
 		item = itemOptional.get();
+		//cliente = clienteOptional.get();
 		
 		//Agregamos al detalle del pedido todo lo que la compone
 		detallePedido.setPrecio(item.getCosto());
@@ -139,9 +143,12 @@ public class HomeController {
 		//Seteamos el total del pedido colocando el valor del total de la suma de la lista del pedido (funcion anterior)
 		pedido.setTotal(sumaTotal);
 		
+		//pedido.setCliente(cliente);
+		
 		//Objeto model para llevar hacia la vista toda la informacion
 		model.addAttribute("detallePedido", detalles); //Le pasamos a la orden el detalle de la lista de lo que añadio al pedido
 		model.addAttribute("pedido", pedido); //Pasamos el pedido
+		model.addAttribute("cliente", cliente);
 		
 		return "cliente/orden";
 	}
