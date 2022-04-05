@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.sistema.crisalis.model.DetallePedido;
 import com.sistema.crisalis.model.ItemVenta;
 import com.sistema.crisalis.model.Pedido;
+import com.sistema.crisalis.model.Producto;
+import com.sistema.crisalis.model.Servicio;
 import com.sistema.crisalis.service.ItemVentaService;
 
 @Controller //Señalamos a Spring la clase como controlador
@@ -25,6 +28,9 @@ public class HomeController {
 	
 	//Variable logger para testear por consola si realiza el crud y no insertar en la BBDD
 	private final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
+	
+	//Descuento a c/producto si hay servicio
+	private final double DESCUENTO = 0.1;
 	
 	@Autowired
 	private ItemVentaService itemVentaService;
@@ -35,6 +41,10 @@ public class HomeController {
 	//Almacenamos el pedido y sus datos
 	Pedido pedido = new Pedido();
 	
+	Servicio servicio = new Servicio();
+	
+	Producto producto = new Producto();
+	
 	
 	//Mapeamos la ruta a la pagina principal
 	@GetMapping("")
@@ -44,7 +54,7 @@ public class HomeController {
 	}
 	
 	/*@GetMapping("orden/{id}")
-	public String agregarAlPedido(@PathVariable Integer id, Model model) { //Buscamos el Item por ID y lo pasamos a la vista con Model
+	public String agregarAlPedido(@PathVariable Integer id, Model model) { 
 		
 		ItemVenta item = new ItemVenta();
 		
@@ -86,10 +96,39 @@ public class HomeController {
 		detallePedido.setTotal(item.getCosto()*1);
 		detallePedido.setItem(item);
 		
-		//Agregamos cada producto y su detalle a la lista
-		detalles.add(detallePedido);
+		/*
+		//Comprobacion para verificar si tengo un servicio en la lista
 		
-		//Funcion anonima: a todos los objetos de la lista detalles le obtenemos el total de c/item y lo sumamos
+		boolean ingresado = detalles.stream().anyMatch(i -> i.getItem().getClass().equals(servicio.getClass())); //boolean que nos verifica si un item en la lista
+																												//"detalles" es de tipo "Servicio"
+		
+		if(ingresado) { Si es "true" (hay match) entonces
+			//Agregamos el servicio a la lista PERO
+			detalles.add(detallePedido);
+			// cada producto que tengamos en nuestra lista detalle:
+			for(DetallePedido detalleP : detalles) {
+				if(detallePedido.getItem().getClass().equals(producto.getClass())) {
+					double descuentoProducto = detalleP.getItem().getCosto() - (detalleP.getItem().getCosto()*DESCUENTO);
+					
+			}
+			
+		}
+		}
+		*/
+		
+		//Validamos que nuestra lista detalle del pedido no tenga ya el mismo item
+		Integer idItem = item.getId();
+		boolean ingresado = detalles.stream().anyMatch(i -> i.getItem().getId() == idItem);
+		
+		if(!ingresado) { //Si existe entonces anyMatch es true por eso !ingresado
+			
+			//Agregamos cada item y su detalle a la lista
+			detalles.add(detallePedido);
+			
+		}
+		
+		
+		//Funcion lambda: a todos los objetos de la lista detalles le obtenemos el total de c/item y lo sumamos
 		sumaTotal = detalles.stream().mapToDouble(dt->dt.getTotal()).sum();
 		
 		//Seteamos el total del pedido colocando el valor del total de la suma de la lista del pedido (funcion anterior)
@@ -100,6 +139,57 @@ public class HomeController {
 		model.addAttribute("pedido", pedido); //Pasamos el pedido
 		
 		return "cliente/orden";
+	}
+	
+	
+	//Metodo que elimina un item del pedido
+	
+	@GetMapping("/delete/orden/{id}") //Obtenemos como atributo el Id del producto a borrar en la URL
+	public String quitarDelPedido(@PathVariable Integer id, Model model) { //Buscamos el Item por ID y lo pasamos a la vista con Model
+		
+		//Lista nueva de productos: quitamos el producto de la lista, creamos una lista donde vamos poniendo los item que quedan
+		List<DetallePedido> pedidoNuevo = new ArrayList<>();
+		
+		//Quitamos el producto de la variable global "detalles"
+		for(DetallePedido detallePedido : detalles) {
+			if(detallePedido.getItem().getId()!= id) { /*Si el id del producto de la lista que estamos 
+														recorriendo es diferente al que viene por argumento 
+														entonces lo agregamos a la lista nueva, porque si es igual
+														entonces es el que estamos buscando eliminar*/
+				pedidoNuevo.add(detallePedido); 
+			}
+		}
+		
+		/*Por ultimo colocamos en la lista global "detalles" el 
+		 * contenido de la nueva lista (sin el item que queremos eliminar)*/
+		detalles = pedidoNuevo;
+		
+		//Recalculamos de nuevo los precios y actualizamos la orden
+		
+		double sumaTotal = 0;
+		
+		//IDEM agregarAlPedido()
+		sumaTotal = detalles.stream().mapToDouble(dt->dt.getTotal()).sum();
+		
+		//Seteamos el total del pedido pero ahora ya con el producto que eliminamos (DEBERIA SER MENOR)
+		pedido.setTotal(sumaTotal);
+		
+		//Objeto model para llevar hacia la vista toda la informacion
+		model.addAttribute("detallePedido", detalles); //Le pasamos a la orden el detalle de la lista de lo que añadio al pedido
+		model.addAttribute("pedido", pedido); //Pasamos el pedido
+		
+		
+		return "cliente/orden";
+	}
+	
+	@GetMapping("/nuevoPedido")
+	public String nuevoPedido(Model model) {
+		
+		model.addAttribute("detallePedido", detalles); //Le pasamos a la orden el detalle de la lista de lo que añadio al pedido
+		model.addAttribute("pedido", pedido); //Pasamos el pedido
+		
+		
+		return "/cliente/orden";
 	}
 	
 }

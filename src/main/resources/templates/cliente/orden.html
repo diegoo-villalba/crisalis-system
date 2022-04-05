@@ -52,17 +52,12 @@
 									<td th:text="${dPedido.nombre}"></td>
 									<td th:text="${dPedido.precio}"></td>
 									<td th:text="${dPedido.total}"></td>
-									<td><a href="#" class="btn btn-danger">Quitar</a></td>
+									<!-- MAPEAMOS el boton al METODO DELETE del controlador Home -->
+									<td><a th:href="@{delete/orden/{id} (id=${dPedido.item.id}) }" class="btn btn-danger">Quitar</a></td>
 								</tr>
 							</tbody>
 						</table>
-					</div> <!-- detallePedido
-							private String nombre;
-							private double precio;
-							private double total;
-							
-					 -->
-
+					</div> 
 					<div class="col-lg-3">
 						<h2 class="card-title">SUBTOTAL</h2>
 
