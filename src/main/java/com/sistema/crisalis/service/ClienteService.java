@@ -11,7 +11,7 @@ public interface ClienteService {
 
 	public Cliente insertar(Cliente cliente);
 
-	public Optional<Cliente> getUnCliente(Integer id);// Optional: nos permite validar si el objeto que llamamos de la
+	public Optional<Cliente> getUnCliente(Integer id);// Optional: contenedor que nos permite validar si el objeto que llamamos de la
 														// BBDD existe o no
 	public void update(Cliente cliente);
 

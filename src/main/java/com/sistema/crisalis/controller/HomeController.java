@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sistema.crisalis.model.Cliente;
 import com.sistema.crisalis.model.DetallePedido;
 import com.sistema.crisalis.model.ItemVenta;
 import com.sistema.crisalis.model.Pedido;
 import com.sistema.crisalis.model.Producto;
 import com.sistema.crisalis.model.Servicio;
+import com.sistema.crisalis.service.ClienteService;
 import com.sistema.crisalis.service.ItemVentaService;
 
 @Controller //Señalamos a Spring la clase como controlador
@@ -34,6 +36,9 @@ public class HomeController {
 	
 	@Autowired
 	private ItemVentaService itemVentaService;
+	
+	@Autowired
+	private ClienteService clienteService;
 	
 	//Lista del Detalle del pedido donde almacenamos los items
 	List<DetallePedido> detalles = new ArrayList<>();
@@ -190,6 +195,18 @@ public class HomeController {
 		
 		
 		return "/cliente/orden";
+	}
+	
+	@GetMapping("/resumenOrden")
+	public String resumenOrden(Model model) {
+		
+		Cliente cliente = clienteService.getUnCliente(1).get(); // .get() porque sino solo me retorna un Optional
+		
+		model.addAttribute("detallePedido", detalles); //Le pasamos a la orden el detalle de la lista de lo que añadio al pedido
+		model.addAttribute("pedido", pedido); //Pasamos el pedido
+		model.addAttribute("cliente", cliente);
+		
+		return "/cliente/resumenorden";
 	}
 	
 }
