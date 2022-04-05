@@ -50,15 +50,38 @@ public class PedidoServiceImpl implements PedidoService{
 	}
 	
 	//Metodo para generar un numero de pedido (secuencial)
+	@Override
 	public String generarNumeroPedido() {
+		//Inicializo una variable numero pedido, es la variable que se va a ir incrementando
 		int numeroPedido = 0;
-		String num = "";
 		
+		//Nos devuelve el String con el secuencial del N° de orden
+		String numeroConcatenado = "";
+		
+		//Lista que contiene los pedidos para obtener el numero del ultimo pedido ingresado
 		List<Pedido> pedidos = getPedidos();
 		
+		//Lista de enteros donde vamos colocando el n° de pedido de c/orden (estan en String)
 		List<Integer> numeros = new ArrayList<Integer>();
 		
-		return "";
+		//Parseamos de Integer(asi viene de la BBDD) a String: añado en mi lista "numeros" los n° ordenes "p" parseados
+		pedidos.stream().forEach(p -> numeros.add(Integer.parseInt(p.getNumeroPedido())));
+		
+		if(pedidos.isEmpty()) { //Si no tenemos ningun pedido en la lista entonces es el primero
+			numeroPedido = 1;
+		} else { //Si la lista no viene vacia es porque ya tiene pedidos, entonces al mayor valor de la lista "numeros" le sumamos 1
+			numeros.stream().max(Integer::compare).get(); //NOS DEVUELVE EL MAYOR NUMERO DE LA LISTA
+			numeroPedido++;
+		}
+		
+		//Debemos parsear de nuevo a String
+		if (numeroPedido < 10) {
+			numeroConcatenado = "0000"+String.valueOf(numeroPedido); //Concatenamos
+		} else if (numeroPedido < 100) {
+			numeroConcatenado = "000"+String.valueOf(numeroPedido); //Vamos quitando 0 (ceros) a medida que aumentan los digitos
+		}
+		
+		return numeroConcatenado;
 	}
 
 }

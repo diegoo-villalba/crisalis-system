@@ -37,6 +37,7 @@
   <table class="table">
     <thead>
       <tr>
+      	<th scope="col">Id</th>
         <th scope="col">Nombre</th>
         <th scope="col">Apellido</th>
         <th scope="col">DNI</th>
@@ -47,6 +48,7 @@
     <tbody>
      <!-- Each: para recorrer la lista de los productos de la BBDD -->
        <tr th:each="cliente:${clientes}"> <!-- Nombre de la variable del addAttribute en el controlador -->
+        <td th:text="${cliente.id}"></td>
         <td th:text="${cliente.nombre}"></td>
         <td th:text="${cliente.apellido}"></td>
         <td th:text="${cliente.dni}"></td> 

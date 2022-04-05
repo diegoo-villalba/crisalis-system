@@ -18,5 +18,7 @@ public interface PedidoService {
 		public void delete(Integer id);
 		
 		public List<Pedido> getPedidos();
+		
+		public String generarNumeroPedido();
 
 }

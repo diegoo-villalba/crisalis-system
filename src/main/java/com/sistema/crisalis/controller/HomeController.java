@@ -1,6 +1,7 @@
 package com.sistema.crisalis.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,23 +23,28 @@ import com.sistema.crisalis.model.DetallePedido;
 import com.sistema.crisalis.model.ItemVenta;
 import com.sistema.crisalis.model.Pedido;
 import com.sistema.crisalis.service.ClienteService;
+import com.sistema.crisalis.service.DetallePedidoService;
 import com.sistema.crisalis.service.ItemVentaService;
+import com.sistema.crisalis.service.PedidoService;
 
 @Controller //Señalamos a Spring la clase como controlador
 @RequestMapping("/home") 
 public class HomeController {
-	
-	//Variable logger para testear por consola si realiza el crud y no insertar en la BBDD
-	private final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
-	
-	//Descuento a c/producto si hay servicio
-	private final double DESCUENTO = 0.1;
 	
 	@Autowired
 	private ItemVentaService itemVentaService;
 	
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private PedidoService pedidoService;
+	
+	@Autowired
+	private DetallePedidoService detallePedidoService;
+	
+	//Variable logger para testear por consola si realiza el crud y no insertar en la BBDD
+	private final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 	
 	//Lista del Detalle del pedido donde almacenamos los items
 	List<DetallePedido> detalles = new ArrayList<>();
@@ -189,6 +195,16 @@ public class HomeController {
 		model.addAttribute("cliente", cliente);
 		
 		return "/cliente/resumenorden";
+	}
+	
+	@GetMapping("/guardarOrden")
+	public String guardarOrden() {
+		//
+		Date fechaCreacion = new Date();
+		
+		
+		
+		return "";
 	}
 	
 
