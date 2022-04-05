@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,6 @@ import com.sistema.crisalis.model.Cliente;
 import com.sistema.crisalis.model.DetallePedido;
 import com.sistema.crisalis.model.ItemVenta;
 import com.sistema.crisalis.model.Pedido;
-import com.sistema.crisalis.model.Producto;
-import com.sistema.crisalis.model.Servicio;
 import com.sistema.crisalis.service.ClienteService;
 import com.sistema.crisalis.service.ItemVentaService;
 
@@ -30,7 +30,6 @@ public class HomeController {
 	
 	//Variable logger para testear por consola si realiza el crud y no insertar en la BBDD
 	private final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
-	
 	
 	//Descuento a c/producto si hay servicio
 	private final double DESCUENTO = 0.1;
@@ -47,14 +46,12 @@ public class HomeController {
 	//Almacenamos el pedido y sus datos
 	Pedido pedido = new Pedido();
 	
-	//Servicio servicio = new Servicio();
-	
-	//Producto producto = new Producto();
-	
 	
 	//Mapeamos la ruta a la pagina principal
 	@GetMapping("")
-	public String home() {
+	public String home(HttpSession session) {
+		
+		LOGGER.info("Sesion del usuario: {}", session.getAttribute("idCliente"));
 		
 		return "home.html"; //Busca el archivo .html en Templates
 	}
@@ -181,9 +178,11 @@ public class HomeController {
 	}
 	
 	@GetMapping("/resumenOrden")
-	public String resumenOrden(Model model) {
+	public String resumenOrden(Model model, HttpSession session) {
 		
-		Cliente cliente = clienteService.getUnCliente(1).get(); // .get() porque sino solo me retorna un Optional
+		
+		
+		Cliente cliente = clienteService.getUnCliente(Integer.parseInt(session.getAttribute("idCliente").toString())).get(); // .get() porque sino solo me retorna un Optional
 		
 		model.addAttribute("detallePedido", detalles); //Le pasamos a la orden el detalle de la lista de lo que añadio al pedido
 		model.addAttribute("pedido", pedido); //Pasamos el pedido
