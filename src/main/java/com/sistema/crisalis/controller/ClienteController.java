@@ -2,6 +2,8 @@ package com.sistema.crisalis.controller;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,5 +81,37 @@ public class ClienteController {
 		clienteService.delete(id);
 		return "redirect:/clientes"; 
 	}
+	
+	//clientes/registro
+	@GetMapping("/registro") //Metodo para obtener la vista para el registro del usuario al pedido
+	public String registrar() {
+		return "cliente/registro";
+	}
+	
+	//Guardar la "sesion" del cliente y poder transportar su ID al pedido
+	@PostMapping("/guardarCliente") 
+	public String guardarClienteRegistrado(Cliente cliente, HttpSession session) { /*session: para que el objeto Cliente se mantenga activo en la sesion
+	 																				y poder utilizarlo luego en el resto de la aplicacion*/
+		
+		//Valido que el ID del cliente se encuentre en la BBDD pasando su ID como argumento del Optional
+		Optional<Cliente> optionalCliente = clienteService.getUnCliente(cliente.getId());
+		
+		//Imprimo por consola a ver si me trae el cliente
+		LOGGER.info("Cliente guardado : {}", optionalCliente.get());
+		
+		//Optional tiene el metodo boolean "isPresent" que me permite verificar si efectivamente el registro está en la BBDD
+		if(optionalCliente.isPresent()) {
+			
+			session.setAttribute("idCliente", optionalCliente.get().getId());
+			return "redirect:/home/resumenOrden";
+		} else {
+			//Imprimo por consola a modo de guia para verificar si existe o no
+			LOGGER.info("Cliente inexistente en la BBDD");
+			
+		}
+		
+		return "redirect:/home/resumenOrden";
+	}
+	
 
 }

@@ -31,6 +31,7 @@ public class HomeController {
 	//Variable logger para testear por consola si realiza el crud y no insertar en la BBDD
 	private final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 	
+	
 	//Descuento a c/producto si hay servicio
 	private final double DESCUENTO = 0.1;
 	
@@ -46,9 +47,9 @@ public class HomeController {
 	//Almacenamos el pedido y sus datos
 	Pedido pedido = new Pedido();
 	
-	Servicio servicio = new Servicio();
+	//Servicio servicio = new Servicio();
 	
-	Producto producto = new Producto();
+	//Producto producto = new Producto();
 	
 	
 	//Mapeamos la ruta a la pagina principal
@@ -57,26 +58,6 @@ public class HomeController {
 		
 		return "home.html"; //Busca el archivo .html en Templates
 	}
-	
-	/*@GetMapping("orden/{id}")
-	public String agregarAlPedido(@PathVariable Integer id, Model model) { 
-		
-		ItemVenta item = new ItemVenta();
-		
-		//Contenedor del item que buscamos en la BBDD por Id
-		Optional<ItemVenta> itemOptional = itemVentaService.getItem(id);
-		
-		//Pasamos el item de Optional a la instancia Item
-		item = itemOptional.get();
-		
-		//Enviamos el item a la vista a traves del modelo
-		model.addAttribute("item", item);
-		
-		LOGGER.info("Id registro enviado como parámetro {}", id);
-		
-		return "cliente/orden";
-	}
-	*/
 	
 	//Metodo que añade los items al pedido reicibendo por argumento el id
 	
@@ -90,14 +71,11 @@ public class HomeController {
 		double sumaTotal = 0;
 		
 		Optional<ItemVenta> itemOptional = itemVentaService.getItem(id);
-		//Optional<Cliente> clienteOptional = clienteService.getUnCliente(idCliente);
 		
 		LOGGER.info("Item añadido: {}", itemOptional.get());
-		//LOGGER.info("Cliente añadido: {}", clienteOptional.get());
 		
 		//Colocamos en la variable ITEM lo que tiene el contenedor Optional
 		item = itemOptional.get();
-		//cliente = clienteOptional.get();
 		
 		//Agregamos al detalle del pedido todo lo que la compone
 		detallePedido.setPrecio(item.getCosto());
@@ -143,12 +121,10 @@ public class HomeController {
 		//Seteamos el total del pedido colocando el valor del total de la suma de la lista del pedido (funcion anterior)
 		pedido.setTotal(sumaTotal);
 		
-		//pedido.setCliente(cliente);
 		
 		//Objeto model para llevar hacia la vista toda la informacion
 		model.addAttribute("detallePedido", detalles); //Le pasamos a la orden el detalle de la lista de lo que añadio al pedido
 		model.addAttribute("pedido", pedido); //Pasamos el pedido
-		model.addAttribute("cliente", cliente);
 		
 		return "cliente/orden";
 	}
@@ -216,4 +192,5 @@ public class HomeController {
 		return "/cliente/resumenorden";
 	}
 	
+
 }

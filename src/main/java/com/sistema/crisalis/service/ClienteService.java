@@ -18,5 +18,7 @@ public interface ClienteService {
 	public void delete(Integer id);
 	
 	public List<Cliente> getClientes();
+	
+	Optional<Cliente> findById(Integer id);
 
 }

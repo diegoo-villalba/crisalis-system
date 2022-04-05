@@ -47,4 +47,9 @@ public class ClienteServiceImpl implements ClienteService{
 		return clienteDAO.findAll();
 	}
 
+	@Override
+	public Optional<Cliente> findById(Integer id) {
+		return clienteDAO.findById(id);
+	}
+
 }

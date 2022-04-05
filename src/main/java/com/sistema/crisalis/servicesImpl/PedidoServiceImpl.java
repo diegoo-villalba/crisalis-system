@@ -1,5 +1,6 @@
 package com.sistema.crisalis.servicesImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +47,18 @@ public class PedidoServiceImpl implements PedidoService{
 	@Override
 	public List<Pedido> getPedidos() {
 		return pedidoDAO.findAll();
+	}
+	
+	//Metodo para generar un numero de pedido (secuencial)
+	public String generarNumeroPedido() {
+		int numeroPedido = 0;
+		String num = "";
+		
+		List<Pedido> pedidos = getPedidos();
+		
+		List<Integer> numeros = new ArrayList<Integer>();
+		
+		return "";
 	}
 
 }

@@ -39,11 +39,14 @@
 				<div class="row">
 					<div class="col-lg-9">
 						<div class="card-body">
-							<h5 class="card-title">DATOS CLIENTE</h5>
+							<h5 class="card-title">DATOS CLIENTE</h5>	
+								<div style = " float:right;" class="">
+									<a th:href="@{/clientes/registro}" class="btn btn-secondary">Añadir cliente</a>
+								</div>
 							<h6 th:text=" 'Nombre: ' + ${cliente.nombre}"></h6>
 							<h6 th:text=" 'Apellido: ' + ${cliente.apellido}"></h6>
 							<h6 th:text=" 'DNI: ' + ${cliente.dni}"></h6>
-
+							
 							<h5 class="card-title">DATOS ITEMS</h5>
 							<div class="alert alert-light" role="alert">
 								<table class="table">
