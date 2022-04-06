@@ -55,9 +55,12 @@ public class HomeController {
 	
 	//Mapeamos la ruta a la pagina principal
 	@GetMapping("")
-	public String home(HttpSession session) {
+	public String home(Model model, HttpSession session) {
 		
 		LOGGER.info("Sesion del usuario: {}", session.getAttribute("idCliente"));
+		
+		//session
+		model.addAttribute("sesion", session.getAttribute("idCliente"));
 		
 		return "home.html"; //Busca el archivo .html en Templates
 	}
@@ -174,19 +177,19 @@ public class HomeController {
 	}
 	
 	@GetMapping("/nuevoPedido")
-	public String nuevoPedido(Model model) {
+	public String nuevoPedido(Model model, HttpSession session) {
 		
 		model.addAttribute("detallePedido", detalles); //Le pasamos a la orden el detalle de la lista de lo que añadio al pedido
 		model.addAttribute("pedido", pedido); //Pasamos el pedido
 		
+		//sesion
+		model.addAttribute("sesion", session.getAttribute("idCliente"));
 		
-		return "/cliente/orden";
+		return "cliente/orden";
 	}
 	
 	@GetMapping("/resumenOrden")
 	public String resumenOrden(Model model, HttpSession session) {
-		
-		
 		
 		Cliente cliente = clienteService.getUnCliente(Integer.parseInt(session.getAttribute("idCliente").toString())).get(); // .get() porque sino solo me retorna un Optional
 		
@@ -197,14 +200,57 @@ public class HomeController {
 		return "/cliente/resumenorden";
 	}
 	
+	//Metodo para guardar el pedido cuando apretamos en "Generar" en la vista ResumenPedido
 	@GetMapping("/guardarOrden")
-	public String guardarOrden() {
-		//
+	public String guardarOrden(HttpSession session) {
+		
+		//Variable fecha para guardar la fecha de creacion
 		Date fechaCreacion = new Date();
 		
+		//Al pedido declarado previamente le seteamos la fecha
+		pedido.setFechaCreacion(fechaCreacion);
+		
+		//Seteamos el numero de pedido
+		pedido.setNumeroPedido(pedidoService.generarNumeroPedido());
+		
+		//Anadimos el cliente que realiza el pedido
+		Cliente cliente = clienteService.getUnCliente(Integer.parseInt(session.getAttribute("idCliente").toString())).get();
+		pedido.setCliente(cliente);
+		
+		//Guardamos el pedido
+		pedidoService.insertar(pedido);
+		
+		//Guardamos los detalles del pedido
+		for (DetallePedido dPedido : detalles) {
+			dPedido.setPedido(pedido);
+			detallePedidoService.insertar(dPedido); //Guardamos el detalle del pedido
+		}
+		
+		//Limpiamos la lista si hay un nuevo pedido que agregar para el mismo cliente
+		
+		pedido = new Pedido(); //Generamos un nuevo pedido
+		detalles.clear(); //LImpiamos el contenido de la lista
 		
 		
-		return "";
+		return "redirect:/home";
+	}
+	
+	//Metodo que nos muestra los pedidos del cliente
+	@GetMapping("/pedidosRealizados")
+	public String obtenerPedidos(Model model, HttpSession session) {
+		
+		model.addAttribute("sesion", session.getAttribute("idCliente"));
+		
+		//Instanciamos un cliente y lo buscamos por Id
+		Cliente cliente = clienteService.findById( Integer.parseInt(session.getAttribute("idCliente").toString())).get();
+		
+		//Definimos un Optional y le pasamos el cliente que lo obtenemos de la sesion para asi obtener su lista de pedidos
+		Optional<Pedido> pedidoOptional =pedidoService.findByCliente(cliente);
+		
+		//Al modelo le pasamos la lista de ordenes del usuario
+		model.addAttribute("pedidos", pedidoOptional);
+		
+		return "cliente/pedidos";
 	}
 	
 

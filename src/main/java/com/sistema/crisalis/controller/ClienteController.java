@@ -103,7 +103,7 @@ public class ClienteController {
 		if(optionalCliente.isPresent()) {
 			
 			session.setAttribute("idCliente", optionalCliente.get().getId());
-			return "redirect:/home/resumenOrden";
+			return "redirect:/home";
 		} else {
 			//Imprimo por consola a modo de guia para verificar si existe o no
 			LOGGER.info("Cliente inexistente en la BBDD");
@@ -113,5 +113,4 @@ public class ClienteController {
 		return "redirect:/home/resumenOrden";
 	}
 	
-
 }

@@ -3,6 +3,7 @@ package com.sistema.crisalis.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.sistema.crisalis.model.Cliente;
 import com.sistema.crisalis.model.Pedido;
 
 public interface PedidoService {
@@ -20,5 +21,7 @@ public interface PedidoService {
 		public List<Pedido> getPedidos();
 		
 		public String generarNumeroPedido();
+		
+		public Optional<Pedido> findByCliente(Cliente cliente);	
 
 }

@@ -18,8 +18,13 @@
 
 <body>
 
-	<!-- NAV -->
-	<div th:include="template-foonav.html::header"></div>
+	 <!-- NAV -->
+  	<!-- HEADER para cuando no pasamos ningun ID todavia -->
+	<div th:include="cliente/template-cliente.html::header" th:if="${sesion==null}"></div>
+
+	<!-- HEADER para cuando pasamos el ID al cual le asignamos los items y pedidos -->
+	<!-- anotacion thymeleaf: unless (Si no es null entonces hay un ID y por lo tanto tiene sus pedids) -->
+	<div th:include="cliente/template-cliente.html::header-cliente" th:unless="${sesion==null}"></div>
 
 	<div class="container">
 

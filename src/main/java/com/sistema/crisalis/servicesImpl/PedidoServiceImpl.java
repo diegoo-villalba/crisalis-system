@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sistema.crisalis.model.Cliente;
 import com.sistema.crisalis.model.Pedido;
 import com.sistema.crisalis.repository.PedidoDAO;
 import com.sistema.crisalis.service.PedidoService;
@@ -82,6 +83,11 @@ public class PedidoServiceImpl implements PedidoService{
 		}
 		
 		return numeroConcatenado;
+	}
+
+	@Override
+	public Optional<Pedido> findByCliente(Cliente cliente) {
+		return pedidoDAO.findByCliente(cliente);
 	}
 
 }

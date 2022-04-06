@@ -1,6 +1,7 @@
 package com.sistema.crisalis.model;
 
-import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,10 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "pedido")
@@ -23,30 +22,26 @@ public class Pedido {
 	private Integer id;
 	private double total;
 	private String numeroPedido;
-	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate fechaCreacion;
-	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate fechaRecibido;
+	private Date fechaCreacion;
+	private Date fechaRecibido;
 
 	@ManyToOne
 	private Cliente cliente; // Un cliente puede tener muchas ordenes
 
-	@OneToOne(mappedBy = "pedido")
-	private DetallePedido detallePedido; //Un pedido tiene su detalle
+	@OneToMany(mappedBy = "pedido")
+	private List<DetallePedido> detallePedido; //Un pedido tiene su detalle
 	
 	public Pedido() {
 	}
 
-	public Pedido(double total, String numeroPedido, LocalDate fechaCreacion, LocalDate fechaRecibido) {
+	public Pedido(double total, String numeroPedido, Date fechaCreacion, Date fechaRecibido) {
 		this.total = total;
 		this.numeroPedido = numeroPedido;
 		this.fechaCreacion = fechaCreacion;
 		this.fechaRecibido = fechaRecibido;
 	}
 
-	public Pedido(Integer id, double total, String numeroPedido, LocalDate fechaCreacion, LocalDate fechaRecibido) {
+	public Pedido(Integer id, double total, String numeroPedido, Date fechaCreacion, Date fechaRecibido) {
 		this.id = id;
 		this.total = total;
 		this.numeroPedido = numeroPedido;
@@ -54,7 +49,7 @@ public class Pedido {
 		this.fechaRecibido = fechaRecibido;
 	}
 
-	public Pedido(Integer id, double total, String numeroPedido, LocalDate fechaCreacion, LocalDate fechaRecibido,
+	public Pedido(Integer id, double total, String numeroPedido, Date fechaCreacion, Date fechaRecibido,
 			Cliente cliente) {
 		this.id = id;
 		this.total = total;
@@ -64,8 +59,8 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	public Pedido(Integer id, double total, String numeroPedido, LocalDate fechaCreacion, LocalDate fechaRecibido,
-			Cliente cliente, DetallePedido detallePedido) {
+	public Pedido(Integer id, double total, String numeroPedido, Date fechaCreacion, Date fechaRecibido,
+			Cliente cliente, List<DetallePedido> detallePedido) {
 		this.id = id;
 		this.total = total;
 		this.numeroPedido = numeroPedido;
@@ -87,11 +82,11 @@ public class Pedido {
 		return numeroPedido;
 	}
 
-	public LocalDate getFechaCreacion() {
+	public Date getFechaCreacion() {
 		return fechaCreacion;
 	}
 
-	public LocalDate getFechaRecibido() {
+	public Date getFechaRecibido() {
 		return fechaRecibido;
 	}
 
@@ -107,11 +102,11 @@ public class Pedido {
 		this.numeroPedido = numeroPedido;
 	}
 
-	public void setFechaCreacion(LocalDate fechaCreacion) {
+	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public void setFechaRecibido(LocalDate fechaRecibido) {
+	public void setFechaRecibido(Date fechaRecibido) {
 		this.fechaRecibido = fechaRecibido;
 	}
 
@@ -123,18 +118,18 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	public DetallePedido getDetallePedido() {
+	public List<DetallePedido> getDetallePedido() {
 		return detallePedido;
 	}
 
-	public void setDetallePedido(DetallePedido detallePedido) {
+	public void setDetallePedido(List<DetallePedido> detallePedido) {
 		this.detallePedido = detallePedido;
 	}
 
 	@Override
 	public String toString() {
 		return "Pedido [id=" + id + ", total=" + total + ", numeroPedido=" + numeroPedido + ", fechaCreacion="
-				+ fechaCreacion + ", fechaRecibido=" + fechaRecibido + ", detallePedido="
+				+ fechaCreacion + ", fechaRecibido=" + fechaRecibido + ", cliente=" + cliente + ", detallePedido="
 				+ detallePedido + "]";
 	}
 
