@@ -22,7 +22,7 @@ import com.sistema.crisalis.service.ClienteService;
 public class ClienteController {
 	
 	//Variable logger para testear por consola si realiza el crud y no insertar en la BBDD
-	private final Logger LOGGER = LoggerFactory.getLogger(ProductoController.class);
+	private final Logger LOGGER = LoggerFactory.getLogger(ClienteController.class);
 	
 	//Inyectamos la interfaz ProductoService para poder implementar todos los metodos del CRUD
 	@Autowired
@@ -88,6 +88,7 @@ public class ClienteController {
 		return "cliente/registro";
 	}
 	
+	
 	//Guardar la "sesion" del cliente y poder transportar su ID al pedido
 	@PostMapping("/guardarCliente") 
 	public String guardarClienteRegistrado(Cliente cliente, HttpSession session) { /*session: para que el objeto Cliente se mantenga activo en la sesion
@@ -112,5 +113,18 @@ public class ClienteController {
 		
 		return "redirect:/home/resumenOrden";
 	}
-	
+	//Metodo que muestra el detalle de la orden, por eso pasamos el id de la misma
+	@GetMapping("/detalle/{id}")
+	public String detallePedido(@PathVariable Integer id, HttpSession session, Model model) { //PathVariable que nos permite mapear el id que viene por la URL
+		
+		//Impresion por consola
+		LOGGER.info("Id del pedido: {}", id);
+		
+		
+		//Pasamos la sesion activa
+		model.addAttribute("sesion", session.getAttribute("idCliente"));
+		
+		
+		return "cliente/resumenorden";
+	}
 }

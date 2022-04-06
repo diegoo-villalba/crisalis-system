@@ -57,7 +57,7 @@
 									<td th:text="${pedido.numeroPedido}"></td>
 									<td th:text="${pedido.fechaCreacion}"></td>
 									<td th:text="${pedido.total}"></td>
-									<td><a href="detallecompra.html" class="btn btn-success">Ver
+									<td><a th:href="@{/clientes/detalle/{id} (id=${pedido.id}) }" class="btn btn-success">Ver
 											Detalle</a></td>
 								</tr>
 							</tbody>
