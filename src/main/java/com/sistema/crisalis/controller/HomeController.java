@@ -232,7 +232,7 @@ public class HomeController {
 		detalles.clear(); //LImpiamos el contenido de la lista
 		
 		
-		return "redirect:/home";
+		return "redirect:/home/";
 	}
 	
 	//Metodo que nos muestra los pedidos del cliente
@@ -245,10 +245,10 @@ public class HomeController {
 		Cliente cliente = clienteService.findById( Integer.parseInt(session.getAttribute("idCliente").toString())).get();
 		
 		//Definimos un Optional y le pasamos el cliente que lo obtenemos de la sesion para asi obtener su lista de pedidos
-		Optional<Pedido> pedidoOptional =pedidoService.findByCliente(cliente);
+		List<Pedido> pedidoList =pedidoService.findByCliente(cliente);
 		
 		//Al modelo le pasamos la lista de ordenes del usuario
-		model.addAttribute("pedidos", pedidoOptional);
+		model.addAttribute("pedidos", pedidoList);
 		
 		return "cliente/pedidos";
 	}

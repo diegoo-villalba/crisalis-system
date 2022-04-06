@@ -22,6 +22,6 @@ public interface PedidoService {
 		
 		public String generarNumeroPedido();
 		
-		public Optional<Pedido> findByCliente(Cliente cliente);	
+		public List<Pedido> findByCliente(Cliente cliente);
 
 }

@@ -34,13 +34,6 @@ public class Pedido {
 	public Pedido() {
 	}
 
-	public Pedido(double total, String numeroPedido, Date fechaCreacion, Date fechaRecibido) {
-		this.total = total;
-		this.numeroPedido = numeroPedido;
-		this.fechaCreacion = fechaCreacion;
-		this.fechaRecibido = fechaRecibido;
-	}
-
 	public Pedido(Integer id, double total, String numeroPedido, Date fechaCreacion, Date fechaRecibido) {
 		this.id = id;
 		this.total = total;
@@ -49,27 +42,7 @@ public class Pedido {
 		this.fechaRecibido = fechaRecibido;
 	}
 
-	public Pedido(Integer id, double total, String numeroPedido, Date fechaCreacion, Date fechaRecibido,
-			Cliente cliente) {
-		this.id = id;
-		this.total = total;
-		this.numeroPedido = numeroPedido;
-		this.fechaCreacion = fechaCreacion;
-		this.fechaRecibido = fechaRecibido;
-		this.cliente = cliente;
-	}
-
-	public Pedido(Integer id, double total, String numeroPedido, Date fechaCreacion, Date fechaRecibido,
-			Cliente cliente, List<DetallePedido> detallePedido) {
-		this.id = id;
-		this.total = total;
-		this.numeroPedido = numeroPedido;
-		this.fechaCreacion = fechaCreacion;
-		this.fechaRecibido = fechaRecibido;
-		this.cliente = cliente;
-		this.detallePedido = detallePedido;
-	}
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -117,7 +90,7 @@ public class Pedido {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-
+	
 	public List<DetallePedido> getDetallePedido() {
 		return detallePedido;
 	}
@@ -132,5 +105,7 @@ public class Pedido {
 				+ fechaCreacion + ", fechaRecibido=" + fechaRecibido + ", cliente=" + cliente + ", detallePedido="
 				+ detallePedido + "]";
 	}
+	
+	
 
 }

@@ -86,7 +86,7 @@ public class PedidoServiceImpl implements PedidoService{
 	}
 
 	@Override
-	public Optional<Pedido> findByCliente(Cliente cliente) {
+	public List<Pedido> findByCliente(Cliente cliente) {
 		return pedidoDAO.findByCliente(cliente);
 	}
 

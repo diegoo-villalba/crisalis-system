@@ -10,9 +10,9 @@
 
 <title>Crisalis System</title>
 
-<link th:href="@{bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
-<link th:href="@{css/heroic-features.css}" rel="stylesheet">
+<link th:href="@{/css/heroic-features.css}" rel="stylesheet">
 
 </head>
 
@@ -54,7 +54,7 @@
 							</thead>
 							<tbody>
 								<tr th:each="pedido:${pedidos}">
-									<td th:text="${pedido.numero}"></td>
+									<td th:text="${pedido.numeroPedido}"></td>
 									<td th:text="${pedido.fechaCreacion}"></td>
 									<td th:text="${pedido.total}"></td>
 									<td><a href="detallecompra.html" class="btn btn-success">Ver

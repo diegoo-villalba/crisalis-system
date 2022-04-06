@@ -1,6 +1,6 @@
 package com.sistema.crisalis.repository;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,5 +14,5 @@ public interface PedidoDAO extends JpaRepository<Pedido, Integer> { /*
 	 * CRUD y el parámetro Integer id
 	 */
 	
-	Optional<Pedido> findByCliente(Cliente cliente);
+	List<Pedido> findByCliente(Cliente cliente);
 }
