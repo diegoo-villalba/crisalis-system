@@ -125,6 +125,6 @@ public class ClienteController {
 		model.addAttribute("sesion", session.getAttribute("idCliente"));
 		
 		
-		return "cliente/resumenorden";
+		return "cliente/detallepedido";
 	}
 }

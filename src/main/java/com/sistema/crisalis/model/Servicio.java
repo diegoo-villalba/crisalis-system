@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "servicio")
 public class Servicio extends ItemVenta {
 
 	private boolean esEspecial;

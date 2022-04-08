@@ -7,7 +7,7 @@ import com.sistema.crisalis.model.Cliente;
 
 public interface ClienteService {
 
-	// Defino todos los metodos para el CRUD de la clase Producto
+	// Defino todos los metodos para el CRUD de la clase Cliente
 
 	public Cliente insertar(Cliente cliente);
 
