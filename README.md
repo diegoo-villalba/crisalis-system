@@ -18,7 +18,7 @@ Esta aplicación web tiene como objetivo demostrar el uso de las herramientas vi
 
 <h3>¿De que se trata?</h3>
 
-1. La aplicacion es un sistema de gestión de pedidos que permite, valga la redundancia, gestionar pedidos de productos, servicios, items de venta en general asignando cada uno a un cliente en particular que debemos especificar y generando luego un detalle del pedido con los items seleccionados, precio, fecha, etc.-
+La aplicacion es un sistema de gestión de pedidos que permite, valga la redundancia, gestionar pedidos de productos, servicios, items de venta en general asignando cada uno a un cliente en particular que debemos especificar y generando luego un detalle del pedido con los items seleccionados, precio, fecha, etc.-
 
 <h3>¿Como hacerlo funcionar?</h3>
 1. Ejecutar la class "CrisalisSystemApplication" ubicada en el paquete "com.sistema.crisalis"
