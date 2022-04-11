@@ -27,7 +27,7 @@ Esta aplicación web tiene como objetivo demostrar el uso de las herramientas vi
 
 3. Una vez en el inicio de la página, puede navegar por las diferentes secciones: Servicios, Clientes, Productos y realizar el CRUD de los registros en c/u de ellas
 
- 4.Si desea gestionar un pedido para un cliente ya existente, se dirige a "Home" y allí al botón "Añadir Cliente" donde será redireccionado a una página para ingresar el ID del cliente por el cual va a gestionar el pedido.
+4. Si desea gestionar un pedido para un cliente ya existente, se dirige a "Home" y allí al botón "Añadir Cliente" donde será redireccionado a una página para ingresar el ID del cliente por el cual va a gestionar el pedido.
 
 5. Una vez ingresado el cliente, como se comentó previamente, puede ir agregando items al pedido del cliente navegando entre las secciones de Servicios y Productos.
 
