@@ -37,5 +37,5 @@ La aplicacion es un sistema de gestión de pedidos que permite, valga la redunda
 
 <h5 class="text-uppercase font-weight-bold">Autor</h5>
 <ul>
-	<li>Diego A. Villalba</li>
+	<li><a href="https://www.linkedin.com/in/villalba-diego/" class="btn btn-success">Diego A. Villalba</a></li>
 </ul>
