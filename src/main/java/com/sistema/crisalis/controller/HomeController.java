@@ -232,7 +232,7 @@ public class HomeController {
 		detalles.clear(); //LImpiamos el contenido de la lista
 		
 		
-		return "redirect:/home/";
+		return "redirect:/home/pedidosRealizados";
 	}
 	
 	//Metodo que nos muestra los pedidos del cliente

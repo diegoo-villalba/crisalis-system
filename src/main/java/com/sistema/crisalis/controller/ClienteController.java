@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sistema.crisalis.model.Cliente;
+import com.sistema.crisalis.model.Pedido;
 import com.sistema.crisalis.service.ClienteService;
+import com.sistema.crisalis.service.PedidoService;
 
 @Controller
 @RequestMapping("/clientes")
@@ -27,6 +29,9 @@ public class ClienteController {
 	//Inyectamos la interfaz ProductoService para poder implementar todos los metodos del CRUD
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private PedidoService pedidoService;
 	
 	@GetMapping("")
 	public String showProductos(Model model) { //El objeto model lleva la info desde el backend a la vista
@@ -104,7 +109,7 @@ public class ClienteController {
 		if(optionalCliente.isPresent()) {
 			
 			session.setAttribute("idCliente", optionalCliente.get().getId());
-			return "redirect:/home";
+			return "redirect:/home/";
 		} else {
 			//Imprimo por consola a modo de guia para verificar si existe o no
 			LOGGER.info("Cliente inexistente en la BBDD");
@@ -120,6 +125,10 @@ public class ClienteController {
 		//Impresion por consola
 		LOGGER.info("Id del pedido: {}", id);
 		
+		Optional<Pedido> pedido = pedidoService.getUnPedido(id);
+		
+		//TRaemos los detalles del pedido
+		model.addAttribute("detalles", pedido.get().getDetallePedido());
 		
 		//Pasamos la sesion activa
 		model.addAttribute("sesion", session.getAttribute("idCliente"));

@@ -34,7 +34,7 @@
       </h1>
 
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
         <li class="breadcrumb-item"><a href="compras.html">Compras</a></li>
         <li class="breadcrumb-item active">Detalle de Compra</li>
       </ol>
@@ -46,18 +46,17 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Cantidad</th>
+                   <th scope="col">Precio</th>
                   <th scope="col">Producto</th>                  
-                  <th scope="col">Precio</th>
                   <th scope="col">Total</th>                  
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td >Cantidad</td>
-                  <td >Producto</td>
-                  <td >Precio</td>
-                  <td >Total</td>
+              
+                <tr th:each="detalle:${detalles}">
+                  <td th:text="${detalle.precio}">Precio</td>
+                  <td th:text="${detalle.nombre}">Producto</td>
+                  <td th:text="${detalle.total}">Total</td>
                 </tr>
               </tbody>
             </table>
